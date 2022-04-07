@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aws-data-lake-pipeline"
+version = "0.1.0"
+description = ""
+authors = ["Wahab Syed <271110+wahab-io@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aws-cdk-lib = "^2.19.0"
+constructs = "^10.0.108"
+"aws-cdk.aws-glue-alpha" = "^2.20.0-alpha.0"
+
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.13.5"
+bandit = "^1.7.4"
+black = "^22.3.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
