@@ -17,7 +17,7 @@ class DataLake(Construct):
 
         glue.Table(
             self,
-            "SalesTable",
+            "RawSalesTable",
             columns=[
                 glue.Column(name="Row Id", type=glue.Schema.BIG_INT),
                 glue.Column(name="Order Id", type=glue.Schema.STRING),
@@ -46,7 +46,43 @@ class DataLake(Construct):
             ],
             database=sales_db,
             data_format=glue.DataFormat.CSV,
-            table_name="sales-records",
+            table_name="raw-sales-records",
             bucket=sales_lake,
             s3_prefix="raw-data",
+        )
+
+        glue.Table(
+            self,
+            "ProcessedSalesTable",
+            columns=[
+                glue.Column(name="Row Id", type=glue.Schema.BIG_INT),
+                glue.Column(name="Order Id", type=glue.Schema.STRING),
+                glue.Column(name="Order Date", type=glue.Schema.STRING),
+                glue.Column(name="Ship Date", type=glue.Schema.STRING),
+                glue.Column(name="Ship Mode", type=glue.Schema.STRING),
+                glue.Column(name="Customer Id", type=glue.Schema.STRING),
+                glue.Column(name="Customer Name", type=glue.Schema.STRING),
+                glue.Column(name="Segment", type=glue.Schema.STRING),
+                glue.Column(name="City", type=glue.Schema.STRING),
+                glue.Column(name="State", type=glue.Schema.STRING),
+                glue.Column(name="Country", type=glue.Schema.STRING),
+                glue.Column(name="Postal Code", type=glue.Schema.BIG_INT),
+                glue.Column(name="Market", type=glue.Schema.STRING),
+                glue.Column(name="Region", type=glue.Schema.STRING),
+                glue.Column(name="Product Id", type=glue.Schema.STRING),
+                glue.Column(name="Category", type=glue.Schema.STRING),
+                glue.Column(name="Sub-Category", type=glue.Schema.STRING),
+                glue.Column(name="Product Name", type=glue.Schema.STRING),
+                glue.Column(name="Sales", type=glue.Schema.DOUBLE),
+                glue.Column(name="Quantity", type=glue.Schema.BIG_INT),
+                glue.Column(name="Discount", type=glue.Schema.DOUBLE),
+                glue.Column(name="Profit", type=glue.Schema.DOUBLE),
+                glue.Column(name="Shipping Cost", type=glue.Schema.DOUBLE),
+                glue.Column(name="Order Priority", type=glue.Schema.STRING),
+            ],
+            database=sales_db,
+            data_format=glue.DataFormat.CSV,
+            table_name="processed-sales-records",
+            bucket=sales_lake,
+            s3_prefix="processed-data",
         )
